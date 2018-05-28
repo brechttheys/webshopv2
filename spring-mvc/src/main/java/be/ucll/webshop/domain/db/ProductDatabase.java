@@ -3,6 +3,7 @@ package be.ucll.webshop.domain.db;
 import be.ucll.webshop.domain.model.Product;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface ProductDatabase {
 
@@ -11,5 +12,6 @@ public interface ProductDatabase {
     void removeProductWithId(int id);
     void updateProduct(int id, Product product);
     Product getProduct(int id);
+    List<Product> getProductsAsList();
 
 }

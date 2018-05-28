@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.enterprise.inject.Model;
@@ -63,5 +64,12 @@ public class ProductController {
     public String deleteProduct(@PathVariable int id) {
         service.removeProduct(id);
         return "redirect:/product.htm";
+    }
+
+    @RequestMapping(value="/weather", method=RequestMethod.GET)
+    public void getWeatherInLeuven() {
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=Leuven&APPID=f9a4e8dd5d3f0210072876cd73d8e27b", String.class);
+        System.out.println(response);
     }
 }

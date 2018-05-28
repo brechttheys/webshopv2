@@ -6,6 +6,7 @@ import be.ucll.webshop.domain.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class ProductService {
@@ -38,4 +39,6 @@ public class ProductService {
     public void removeProduct(int id) {
         products.removeProductWithId(id);
     }
+
+    public List<Product> getProductsAsList() { return products.getProductsAsList(); };
 }

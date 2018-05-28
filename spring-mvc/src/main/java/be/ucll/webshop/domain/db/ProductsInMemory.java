@@ -3,6 +3,7 @@ package be.ucll.webshop.domain.db;
 import be.ucll.webshop.domain.model.Product;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProductsInMemory implements ProductDatabase {
@@ -48,6 +49,11 @@ public class ProductsInMemory implements ProductDatabase {
     @Override
     public Product getProduct(int id) {
         return products.get(id);
+    }
+
+    @Override
+    public List<Product> getProductsAsList() {
+        return (List<Product>) products.values();
     }
 
 

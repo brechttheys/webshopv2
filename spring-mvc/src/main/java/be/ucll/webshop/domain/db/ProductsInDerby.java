@@ -56,4 +56,10 @@ public class ProductsInDerby implements ProductDatabase {
     public Product getProduct(int id) {
         return entityManager.find(Product.class,id);
     }
+
+    @Override
+    public List<Product> getProductsAsList() {
+        List<Product> productslist = entityManager.createQuery("Select c from Product c", Product.class).getResultList();
+        return productslist;
+    }
 }
