@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.enterprise.inject.Model;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String save(Product product, BindingResult result) {
+    public String save(@Valid Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "productForm";
         }
@@ -50,11 +51,17 @@ public class ProductController {
     }
 
     @RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
-    public String update(Product product, BindingResult result, @PathVariable int id) {
+    public String update(@Valid Product product, BindingResult result, @PathVariable int id) {
         if (result.hasErrors()) {
             return "productForm";
         }
         service.updateProduct(id, product);
+        return "redirect:/product.htm";
+    }
+
+    @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+    public String deleteProduct(@PathVariable int id) {
+        service.removeProduct(id);
         return "redirect:/product.htm";
     }
 }

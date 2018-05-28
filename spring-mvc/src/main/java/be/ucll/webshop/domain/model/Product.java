@@ -3,17 +3,23 @@ package be.ucll.webshop.domain.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue
+    @PositiveOrZero(message = "{invalid.negative.number}")
     private int id;
 
+    @NotEmpty(message = "{error.no.name}")
     private String name;
     private String description;
+    @PositiveOrZero(message = "{invalid.negative.number}")
     private double price;
+    @Min(value=0,message="{error.rating.span}")
+    @Max(value=5,message="{error.rating.span}")
     private int rating;
 
     public Product() {}
@@ -46,9 +52,7 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getDescription() {
         return description;

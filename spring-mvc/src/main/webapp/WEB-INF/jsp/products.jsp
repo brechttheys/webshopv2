@@ -10,30 +10,38 @@
 <html>
 <head>
     <title>Products</title>
+    <%@include file="head.jsp"%>
 </head>
 <body>
-<h1>Products</h1>
-<table>
-<tbody>
+<div class="container container-fluid">
+<%@include file="header.jsp"%>
+<h1><spring:message code="products.title" /></h1>
+<table class="table table-dark">
+<thead>
 <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Rating</th>
-    <th>&nbsp</th>
+    <th scope="col">#</th>
+    <th scope="col"><spring:message code="products.name" /></th>
+    <th scope="col"><spring:message code="products.description" /></th>
+    <th scope="col"><spring:message code="products.price" /></th>
+    <th scope="col"><spring:message code="products.rating" /></th>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
 </tr>
+</thead>
+    <tbody>
 <c:forEach items="${products}" var="product">
     <tr>
-        <td>${product.key}</td>
+        <th scope="row">${product.key}</th>
         <td>${product.value.name}</td>
         <td>${product.value.description}</td>
         <td>${product.value.price}</td>
-        <td>${product.value.rating}</td>
-        <td><a class="glyphicon glyphicon-edit" href="<c:url value="product/edit/${product.key}.htm"><c:param name="keyvalue" value="${product.key}"/>></c:url>">Edit</a></td>
+        <td>${product.value.rating} <span class="glyphicon glyphicon-star"></span></td>
+        <td><a class="glyphicon glyphicon-edit" href="<c:url value="product/edit/${product.key}.htm"><c:param name="keyvalue" value="${product.key}"/>></c:url>"></a></td>
+        <td><a class="glyphicon glyphicon-trash" href="<c:url value="product/delete/${product.key}.htm"></c:url>"></a></td>
     </tr>
 </c:forEach>
 </tbody>
 </table>
+</div>
 </body>
 </html>

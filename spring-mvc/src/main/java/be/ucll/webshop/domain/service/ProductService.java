@@ -34,4 +34,8 @@ public class ProductService {
     public void updateProduct(int id, Product product) {
         products.updateProduct(id,product);
     }
+
+    public void removeProduct(int id) {
+        products.removeProductWithId(id);
+    }
 }

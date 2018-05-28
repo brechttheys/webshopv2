@@ -6,8 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <header>
-    <ul>
-        <li><a href="/webshop/product.htm">Products</a></li>
-        <li><a href="/webshop/product/new.htm">Add product</a></li>
-    </ul>
+    <nav class="navbar navbar-dark bg-dark">
+        <form class="form-inline">
+            <a class="btn btn-outline-success" href="/webshop/product.htm"><spring:message code="products.title" /></a>
+            <a class="btn btn-outline-success" href="/webshop/product/new.htm"><spring:message code="products.addproduct" /></a>
+        </form>
+    </nav>
 </header>

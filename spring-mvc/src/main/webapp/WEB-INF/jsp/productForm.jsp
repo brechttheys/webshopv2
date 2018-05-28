@@ -12,15 +12,18 @@
 <html>
 <head>
     <title>Form</title>
+    <%@include file="head.jsp"%>
 </head>
 <body>
+<div class="container container-fluid">
 <%@include file="header.jsp"%>
 <c:choose>
     <c:when test="${product.name == null}">
-        <h1>Add a product</h1>
+        <h1><spring:message code="products.addproduct" /></h1>
         <c:url var="productAction" value="/product/new.htm"/>
     </c:when>
     <c:otherwise>
+        <h1><spring:message code="products.editproduct" /></h1>
         <c:url var="productAction" value="/product/edit/${param.keyvalue}.htm"/>
     </c:otherwise>
 </c:choose>
@@ -53,5 +56,6 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="form.save" /></button>
 
 </form:form>
+</div>
 </body>
 </html>

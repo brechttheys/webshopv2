@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Index</title>
+    <%@include file="head.jsp"%>
 </head>
 <body>
 <div id="container">

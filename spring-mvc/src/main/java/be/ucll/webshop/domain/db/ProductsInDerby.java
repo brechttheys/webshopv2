@@ -35,16 +35,25 @@ public class ProductsInDerby implements ProductDatabase {
 
     @Override
     public void removeProductWithId(int id) {
-
+        Product dbproduct = entityManager.find(Product.class,id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(dbproduct);
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public void updateProduct(int id, Product product) {
-
+        Product dbproduct = entityManager.find(Product.class,id);
+        entityManager.getTransaction().begin();
+        dbproduct.setName(product.getName());
+        dbproduct.setDescription(product.getDescription());
+        dbproduct.setPrice(product.getPrice());
+        dbproduct.setRating(product.getRating());
+        entityManager.getTransaction().commit();
     }
 
     @Override
     public Product getProduct(int id) {
-        return null;
+        return entityManager.find(Product.class,id);
     }
 }
