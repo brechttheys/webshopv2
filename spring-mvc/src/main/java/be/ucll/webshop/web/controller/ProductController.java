@@ -1,6 +1,7 @@
 package be.ucll.webshop.web.controller;
 
 import be.ucll.webshop.domain.model.Product;
+import be.ucll.webshop.domain.model.weather.WeatherData;
 import be.ucll.webshop.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.enterprise.inject.Model;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping(value="/product")
@@ -60,16 +58,10 @@ public class ProductController {
         return "redirect:/product.htm";
     }
 
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable int id) {
         service.removeProduct(id);
         return "redirect:/product.htm";
     }
 
-    @RequestMapping(value="/weather", method=RequestMethod.GET)
-    public void getWeatherInLeuven() {
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=Leuven&APPID=f9a4e8dd5d3f0210072876cd73d8e27b", String.class);
-        System.out.println(response);
-    }
 }

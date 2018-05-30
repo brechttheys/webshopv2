@@ -10,6 +10,7 @@
         <form class="form-inline">
             <a class="btn btn-outline-success" href="/webshop/product.htm"><spring:message code="products.title" /></a>
             <a class="btn btn-outline-success" href="/webshop/product/new.htm"><spring:message code="products.addproduct" /></a>
+            <a class="btn btn-outline-success" href="/webshop/weather.htm"><spring:message code="weather.title" /></a>
         </form>
     </nav>
 </header>
