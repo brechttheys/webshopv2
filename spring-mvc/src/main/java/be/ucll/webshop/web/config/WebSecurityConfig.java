@@ -24,11 +24,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().ignoringAntMatchers("/rest/**");
         http.authorizeRequests()
                 .antMatchers("/", "/index.htm").permitAll()
                 .antMatchers("/css/**", "/images/**").permitAll()
                 .antMatchers("/product.htm").hasAnyRole("USER","ADMIN")
                 .antMatchers("/product/**").hasRole("ADMIN")
+                .antMatchers("/rest/products.htm").permitAll()
+                .antMatchers("/rest/products/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
