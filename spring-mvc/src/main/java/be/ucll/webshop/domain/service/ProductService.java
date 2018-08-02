@@ -40,5 +40,5 @@ public class ProductService {
         products.removeProductWithId(id);
     }
 
-    public List<Product> getProductsAsList() { return products.getProductsAsList(); };
+    public List<Product> getProductsAsList() { return products.getProductsAsList(); }
 }

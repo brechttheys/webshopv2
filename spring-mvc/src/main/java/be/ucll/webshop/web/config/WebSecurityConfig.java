@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/rest/**");
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/index.htm").permitAll()
                 .antMatchers("/css/**", "/images/**").permitAll()
                 .antMatchers("/product.htm").hasAnyRole("USER","ADMIN")
@@ -33,9 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/products.htm").permitAll()
                 .antMatchers("/rest/products/**").permitAll()
                 .antMatchers("/weather.htm").permitAll()
+                .antMatchers("/user.htm").permitAll()
+                .antMatchers("/user/**").permitAll()
+                .antMatchers("/basket.htm").permitAll()
+                .antMatchers("/basket/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/")
                 .and()
                 .httpBasic();
     }

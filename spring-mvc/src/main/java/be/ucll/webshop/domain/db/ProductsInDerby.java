@@ -5,6 +5,8 @@ import be.ucll.webshop.domain.model.Product;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +15,16 @@ public class ProductsInDerby implements ProductDatabase {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("webshopPU");
     EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public ProductsInDerby() {}
+    public ProductsInDerby() {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Driver driver = new org.apache.derby.jdbc.ClientDriver();
+            DriverManager.registerDriver(driver);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public HashMap<Integer, Product> getProducts() {
@@ -43,12 +54,13 @@ public class ProductsInDerby implements ProductDatabase {
 
     @Override
     public void updateProduct(int id, Product product) {
-        Product dbproduct = entityManager.find(Product.class,id);
         entityManager.getTransaction().begin();
+        Product dbproduct = entityManager.find(Product.class,id);
         dbproduct.setName(product.getName());
         dbproduct.setDescription(product.getDescription());
         dbproduct.setPrice(product.getPrice());
         dbproduct.setRating(product.getRating());
+        entityManager.flush();
         entityManager.getTransaction().commit();
     }
 

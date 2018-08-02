@@ -2,8 +2,10 @@ package be.ucll.webshop.domain.db;
 
 import be.ucll.webshop.domain.model.Product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProductsInMemory implements ProductDatabase {
@@ -14,8 +16,6 @@ public class ProductsInMemory implements ProductDatabase {
 
     public ProductsInMemory() {
         this.products = new HashMap<>();
-        addProduct(new Product("Test1","Random",21.5,5));
-        addProduct(new Product("Test2","Random",21.5,5));
     }
 
     public static ProductsInMemory getInstance() {
@@ -53,7 +53,11 @@ public class ProductsInMemory implements ProductDatabase {
 
     @Override
     public List<Product> getProductsAsList() {
-        return (List<Product>) products.values();
+        List<Product> out = new ArrayList<>();
+        for (Product prod : products.values()) {
+            out.add(prod);
+        }
+        return out;
     }
 
 

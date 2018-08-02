@@ -17,17 +17,7 @@
 <body>
 <div class="container container-fluid">
 <%@include file="header.jsp"%>
-<c:choose>
-    <c:when test="${product.name == null}">
-        <h1><spring:message code="products.addproduct" /></h1>
-        <c:url var="productAction" value="/product/new.htm"/>
-    </c:when>
-    <c:otherwise>
-        <h1><spring:message code="products.editproduct" /></h1>
-        <c:url var="productAction" value="/product/edit/${param.keyvalue}.htm"/>
-    </c:otherwise>
-</c:choose>
-<form:form modelAttribute="product" method="post" action="${productAction}">
+<form:form modelAttribute="product" method="post" action="${pageContext.request.contextPath}${productAction}">
 
     <div class="form-group row">
         <form:label path="name" cssClass="control-label"><spring:message code="products.name" /></form:label>

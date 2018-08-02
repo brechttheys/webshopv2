@@ -56,4 +56,18 @@ public class ProductRESTController {
         return json;
     }
 
+    @RequestMapping(value="/edit/{id}", method= RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Product editProduct(@PathVariable int id, @RequestBody Product product) {
+        service.updateProduct(id,product);
+        return service.getProduct(id);
+    }
+
+    @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
+    @ResponseBody
+    public Product getProduct(@PathVariable int id) {
+        return service.getProduct(id);
+    }
+
 }

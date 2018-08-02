@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -32,6 +33,7 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -65,10 +67,14 @@ public class DispatcherServletConfig implements WebMvcConfigurer {
                 favorParameter(true).
                 parameterName("mediaType").
                 ignoreAcceptHeader(true).
-                useJaf(false).
                 defaultContentType(MediaType.APPLICATION_JSON).
-                mediaType("xml", MediaType.APPLICATION_XML).
                 mediaType("json", MediaType.APPLICATION_JSON);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
 
 
